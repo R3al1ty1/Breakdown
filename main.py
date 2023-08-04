@@ -3,7 +3,7 @@ import sys
 
 pygame.init()
 
-screen_width, screen_height = 1900, 1000
+screen_width, screen_height = 1400, 800
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Move, Shoot, and Aim")
 
