@@ -22,22 +22,15 @@ class Player:
 
         keys = pygame.key.get_pressed()
         num_key_pressed = 0
-        if keys[pygame.K_d]:
-            num_key_pressed += 1
-            dx += speed_cos
-            dy += speed_sin
+
         if keys[pygame.K_a]:
-            num_key_pressed += 1
-            dx += -speed_cos
-            dy += -speed_sin
+            dx -= speed
+        if keys[pygame.K_d]:
+            dx += speed
         if keys[pygame.K_w]:
-            num_key_pressed += 1
-            dx += speed_sin
-            dy += -speed_cos
+            dy -= speed
         if keys[pygame.K_s]:
-            num_key_pressed += 1
-            dx += -speed_sin
-            dy += speed_cos
+            dy += speed
 
         if pygame.mouse.get_pressed()[0]:
             self.is_shooting = True
