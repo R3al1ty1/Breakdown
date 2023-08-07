@@ -1,4 +1,10 @@
 import pygame
+import pytmx
+from main import *
+
+tmx_file = "map.tmx"  # Замените на путь к вашему TMX файлу
+tmx_data = pytmx.load_pygame(tmx_file)
+
 
 _ = False
 mini_map = [
@@ -36,7 +42,6 @@ mini_map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
 
-
 class Map:
     def __init__(self, game):
         self.game = game
@@ -45,10 +50,13 @@ class Map:
         self.get_map()
 
     def get_map(self):
-        for j, row in enumerate(self.mini_map):
-            for i, value in enumerate(row):
-                if value:
-                    self.world_map[(i, j)] = value
+        game = Game(self)
+        for layer in tmx_data.visible_layers:
+           if isinstance(layer, pytmx.TiledTileLayer):
+               for x, y, gid in layer:
+                   tile = tmx_data.get_tile_image_by_gid(gid)
+                   if tile:
+                       self.game.screen.blit(tile, (x * tmx_data.tilewidth, y * tmx_data.tileheight))
 
     def draw(self):
         [pygame.draw.rect(self.game.screen, 'darkgray', (pos[0] * 100, pos[1] * 100, 100, 100), 2)
