@@ -1,5 +1,9 @@
+import random
+
 import pygame as pg
 import sys
+import pytmx
+
 from map import *
 from player import *
 from bullet import *
@@ -7,8 +11,11 @@ from bullet import *
 class Game:
     def __init__(self):
         pg.init()
-        self.screen = pg.display.set_mode(RES)
+        self.screen = pg.display.set_mode(RES, pygame.RESIZABLE)
         self.bg_img = pygame.image.load('map/bg_7680x4320.png')
+
+        self.tmx_file = "map/NEW MAP no bg.tmx"
+        self.tmx_data = pytmx.load_pygame(self.tmx_file)
 
         self.clock = pg.time.Clock()
         self.delta_time = 1
@@ -32,6 +39,7 @@ class Game:
         for bullet in self.bullets:
             bullet.draw()
 
+
     def check_events(self):
         for event in pg.event.get():
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
@@ -40,7 +48,7 @@ class Game:
 
     def run(self):
         while True:
-            self.check_events()
+            self.check_events()ww
             self.update()
             self.draw()
             self.player.update()

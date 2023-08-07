@@ -1,3 +1,5 @@
+import random
+
 import pygame
 import math
 from consts import *
@@ -48,8 +50,9 @@ class Player:
              self.angle += PLAYER_ROT_SPEED * self.game.delta_time
         self.angle %= math.tau
 
+
     def check_wall(self, x, y):
-         return (x, y) not in self.game.map.world_map
+        return (x, y) not in self.game.map.world_map
 
     def shoot(self):
         bullet = Bullet(self.game, self.x, self.y, self.angle)
