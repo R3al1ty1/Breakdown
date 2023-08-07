@@ -11,7 +11,6 @@ class Player:
         self.is_shooting = False
         self.diag_move_corr = 1 / math.sqrt(2)
 
-
     def move(self):
         sin_a = math.sin(self.angle)
         cos_a = math.cos(self.angle)

@@ -2,13 +2,14 @@ import pygame as pg
 import sys
 from map import *
 from player import *
-from consts import *
 from bullet import *
 
 class Game:
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode(RES)
+        self.bg_img = pygame.image.load('map/bg_7680x4320.png')
+
         self.clock = pg.time.Clock()
         self.delta_time = 1
         self.bullets = []
@@ -25,7 +26,7 @@ class Game:
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}')
 
     def draw(self):
-        self.screen.fill('black')
+        self.screen.blit(self.bg_img, self.bg_img.get_rect())
         self.map.draw()
         self.player.draw()
         for bullet in self.bullets:
