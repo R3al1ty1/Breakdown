@@ -20,8 +20,8 @@ class Bullet:
             self.game.bullets.remove(self)
 
     def check_collision(self):
-        map_x, map_y = int(self.x), int(self.y)
-        if (map_x, map_y) in self.game.map.world_map:
+        map_x, map_y = round(self.x * 3.14), round(self.y * 3.14)
+        if (map_y, map_x) in self.game.map.mini_map:
             return True
         return False
 

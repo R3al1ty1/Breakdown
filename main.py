@@ -1,8 +1,7 @@
 import random
-
+import pytmx
 import pygame as pg
 import sys
-import pytmx
 
 from map import *
 from player import *
@@ -34,11 +33,10 @@ class Game:
 
     def draw(self):
         self.screen.blit(self.bg_img, self.bg_img.get_rect())
-        self.map.draw()
+        #self.map.draw()
         self.player.draw()
         for bullet in self.bullets:
             bullet.draw()
-
 
     def check_events(self):
         for event in pg.event.get():
@@ -48,7 +46,7 @@ class Game:
 
     def run(self):
         while True:
-            self.check_events()ww
+            self.check_events()
             self.update()
             self.draw()
             self.player.update()
