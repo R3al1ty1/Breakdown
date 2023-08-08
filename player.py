@@ -25,27 +25,34 @@ class Player:
 
         keys = pygame.key.get_pressed()
         num_key_pressed = 0
+        '''
+        print(round(self.x * 3.14), round(self.y * 3.14))
+        print(self.game.map.mini_map[round(self.y * 3.14)][round(self.x * 3.14)])
+        '''
+       # self.prev_x = self.x
+        #self.prev_y = self.y
 
-        #print(self.x * 3.14, round(self.x*3.14))
-        #print(self.y* 3.14, round(self.y* 3.14))
-        #print(self.game.map.mini_map[round(self.y* 3.14)][round(self.x* 3.14)], '\n')
-        if self.game.map.mini_map[round(self.y*3)][round(self.x*3)] == '-1':
-            print(self.game.map.mini_map[round(self.y * 3.14)][round(self.x * 3.14)])
+        if self.game.map.mini_map[round(self.y*3.14)][round(self.x*3.14) - 1] == '-1':
             if keys[pygame.K_a]:
                 self.prev_x = self.x
                 self.x -= speed
-            if keys[pygame.K_d] and self.game.map.mini_map[round(self.y*3)][round(self.x*3) + 1] == '-1':
-                self.prev_x = self.x
-                self.x += speed
+        if self.game.map.mini_map[round(self.y * 3.14)-1][round(self.x * 3.14)] == '-1':
             if keys[pygame.K_w]:
                 self.prev_y = self.y
                 self.y -= speed
+        if self.game.map.mini_map[round(self.y*3.14)][round(self.x*3.14)] == '-1':
+            if keys[pygame.K_d]:
+                self.prev_x = self.x
+                self.x += speed
+        if self.game.map.mini_map[round(self.y * 3.14)][round(self.x * 3.14)] == '-1':
             if keys[pygame.K_s]:
                 self.prev_y = self.y
                 self.y += speed
         else:
+            #print(random.randint(1,10))
             self.x = self.prev_x
             self.y = self.prev_y
+
 
         if pygame.mouse.get_pressed()[0]:
             self.is_shooting = True
@@ -56,7 +63,7 @@ class Player:
             dx *= self.diag_move_corr
             dy *= self.diag_move_corr
 
-       # self.check_wall_collision(dx, dy)
+        #self.check_wall_collision(dx, dy)
 
         if keys[pygame.K_LEFT]:
              self.angle -= PLAYER_ROT_SPEED * self.game.delta_time
@@ -65,19 +72,20 @@ class Player:
         self.angle %= math.tau
 
     #def check_wall(self, x, y):
-    #    return (x, y) not in self.game.map.world_map
+     #   return (x, y) not in self.game.map.mini_map
 
     def shoot(self):
         bullet = Bullet(self.game, self.x, self.y, self.angle)
         self.game.bullets.append(bullet)
 
-
-    #def check_wall_collision(self, dx, dy):
-    #     scale = PLAYER_SIZE_SCALE / self.game.delta_time
-    #     if self.check_wall(int(self.x + dx * scale), int(self.y)):
-    #        self.x += dx
-    #     if self.check_wall(int(self.x), int(self.y + dy * scale)):
-    #        self.y += dy
+    '''
+    def check_wall_collision(self, dx, dy):
+         scale = PLAYER_SIZE_SCALE / self.game.delta_time
+         if self.check_wall(int(self.x + dx * scale), int(self.y)):
+            self.x += dx
+         if self.check_wall(int(self.x), int(self.y + dy * scale)):
+            self.y += dy
+    '''
     def draw(self):
         pygame.draw.circle(self.game.screen, 'green', (self.x * 100, self.y * 100), 15)
 
