@@ -2,6 +2,7 @@ import random
 import pytmx
 import pygame as pg
 import sys
+import time
 
 from map import *
 from player import *
@@ -37,6 +38,7 @@ class Game:
         self.player.draw()
         for bullet in self.bullets:
             bullet.draw()
+
 
     def check_events(self):
         for event in pg.event.get():

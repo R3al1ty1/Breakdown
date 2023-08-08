@@ -1,5 +1,5 @@
 import random
-
+import time
 import pygame
 import math
 from consts import *
@@ -14,6 +14,7 @@ class Player:
         self.diag_move_corr = 1 / math.sqrt(2)
         self.prev_x = self.x
         self.prev_y = self.y
+        self.start = time.time()
 
     def move(self):
         sin_a = math.sin(self.angle)
@@ -75,8 +76,10 @@ class Player:
      #   return (x, y) not in self.game.map.mini_map
 
     def shoot(self):
-        bullet = Bullet(self.game, self.x, self.y, self.angle)
-        self.game.bullets.append(bullet)
+        if time.time() - self.start > BULLET_CD:
+            bullet = Bullet(self.game, self.x, self.y, self.angle)
+            self.game.bullets.append(bullet)
+            self.start = time.time()
 
     '''
     def check_wall_collision(self, dx, dy):
