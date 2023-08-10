@@ -45,13 +45,13 @@ class Game:
 
     def run(self):
         while True:
+
             self.check_events()
             self.update()
             self.draw()
             self.player.update()
             for bullet in self.bullets:
                 bullet.update()
-            self.camera.update()
             self.camera.custom_draw(self.player)
 
 if __name__ == '__main__':
