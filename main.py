@@ -1,12 +1,9 @@
-import random
-import pytmx
 import pygame as pg
 import sys
-import time
-
 from map import *
 from player import *
 from bullet import *
+from camera import  *
 
 class Game:
     def __init__(self):
@@ -25,7 +22,7 @@ class Game:
     def new_game(self):
         self.map = Map(self)
         self.player = Player(self)
-
+        self.camera = CameraGroup()
     def update(self):
         self.player.update()
         pg.display.flip()
@@ -54,7 +51,8 @@ class Game:
             self.player.update()
             for bullet in self.bullets:
                 bullet.update()
-
+            self.camera.update()
+            self.camera.custom_draw(self.player)
 
 if __name__ == '__main__':
     game = Game()

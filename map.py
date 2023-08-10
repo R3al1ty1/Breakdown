@@ -1,7 +1,7 @@
 import pygame
 import pytmx
 import csv
-from pygame_colliders import create_collider
+#from pygame_colliders import create_collider
 from main import *
 
 _ = False
@@ -89,11 +89,11 @@ class Map:
         tmx_file = "map/NEW MAP no bg.tmx"  # Замените на путь к вашему TMX файлу
         tmx_data = pytmx.load_pygame(tmx_file)
         for layer in tmx_data.visible_layers:
-           if isinstance(layer, pytmx.TiledTileLayer):
-               for x, y, gid in layer:
-                   tile = tmx_data.get_tile_image_by_gid(gid)
-                   if tile:
-                      self.game.bg_img.blit(tile, (x * tmx_data.tilewidth, y * tmx_data.tileheight))
+            if isinstance(layer, pytmx.TiledTileLayer):
+                for x, y, gid in layer:
+                    tile = tmx_data.get_tile_image_by_gid(gid)
+                    if tile:
+                        self.game.bg_img.blit(tile, (x * tmx_data.tilewidth, y * tmx_data.tileheight))
         '''
         for i in range(len(mini_map)):
             for j in range(len(mini_map[i])):
